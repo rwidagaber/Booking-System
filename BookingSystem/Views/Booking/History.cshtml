@@ -1,0 +1,407 @@
+﻿@* @model IEnumerable<BookingSystem.Models.Booking>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>History</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@
+@model IEnumerable<BookingSystem.Models.Booking>
+@{
+    ViewData["Title"] = "Booking History";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .idx-wrap {
+        padding: 2rem 1rem;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .idx-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 780px;
+        margin: 0 auto 1.25rem;
+    }
+
+    .idx-heading {
+        font-family: 'DM Serif Display', serif;
+        font-size: 22px;
+        color: #111827;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .idx-meta {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 2px 0 0;
+    }
+
+    .idx-btn-new {
+        height: 36px;
+        padding: 0 1.25rem;
+        background: #0F6E56;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: 'DM Sans', sans-serif;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        text-decoration: none;
+        transition: background 0.15s;
+    }
+
+        .idx-btn-new:hover {
+            background: #085041;
+            color: #fff;
+        }
+
+    .idx-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        max-width: 780px;
+        margin: 0 auto;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .idx-search-bar {
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid #f3f4f6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .idx-search-icon {
+        flex-shrink: 0;
+        opacity: 0.4;
+    }
+
+    .idx-search-input {
+        border: none;
+        background: transparent;
+        font-size: 13px;
+        font-family: 'DM Sans', sans-serif;
+        color: #111827;
+        outline: none;
+        flex: 1;
+    }
+
+        .idx-search-input::placeholder {
+            color: #9ca3af;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead tr {
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    th {
+        padding: 10px 14px;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #6b7280;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 12px 14px;
+        font-size: 13px;
+        color: #111827;
+        border-bottom: 1px solid #f9fafb;
+        vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    .idx-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #E1F5EE;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 500;
+        color: #0F6E56;
+        flex-shrink: 0;
+    }
+
+    .idx-name-cell {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+
+    .idx-id-chip {
+        display: inline-flex;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        color: #6b7280;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-family: monospace;
+    }
+
+    .idx-date-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #E1F5EE;
+        color: #0F6E56;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 3px 9px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+
+    .idx-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .idx-act-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        border: 1px solid #e5e7eb;
+        background: transparent;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.12s;
+        text-decoration: none;
+        color: #374151;
+    }
+
+        .idx-act-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .idx-act-btn.del:hover {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #dc2626;
+        }
+
+    .idx-empty {
+        text-align: center;
+        padding: 2.5rem;
+        color: #6b7280;
+        font-size: 13px;
+        display: none;
+    }
+
+    .idx-footer {
+        padding: 0.75rem 1.25rem;
+        border-top: 1px solid #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f9fafb;
+    }
+
+    .idx-footer-text {
+        font-size: 12px;
+        color: #6b7280;
+    }
+</style>
+
+@{
+    var count = Model.Count();
+}
+
+<div class="idx-wrap">
+
+    <div class="idx-topbar">
+        <div>
+            <p class="idx-heading">Booking History</p>
+            <p class="idx-meta">@count total booking@(count == 1 ? "" : "s")</p>
+        </div>
+        <a asp-action="Create" class="idx-btn-new">
+            <svg width="13" height="13" fill="none" stroke="white" stroke-width="2.2" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            New Booking
+        </a>
+    </div>
+
+    <div class="idx-card">
+
+        <div class="idx-search-bar">
+            <svg class="idx-search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input class="idx-search-input" placeholder="Search by name, service, phone…" oninput="filterRows(this.value)" />
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.BookingId)</th>
+                    <th>@Html.DisplayNameFor(m => m.CustomerName)</th>
+                    <th>@Html.DisplayNameFor(m => m.Phone)</th>
+                    <th>@Html.DisplayNameFor(m => m.Service)</th>
+                    <th>@Html.DisplayNameFor(m => m.AppointmentDate)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="bookingTable">
+                @foreach (var item in Model)
+                {
+                    var initials = string.IsNullOrEmpty(item.CustomerName) ? "?" :
+                    string.Concat(item.CustomerName.Split(' ')
+                    .Where(w => w.Length > 0).Take(2)
+                    .Select(w => w[0].ToString().ToUpper()));
+                    <tr>
+                        <td><span class="idx-id-chip">#@item.BookingId</span></td>
+                        <td>
+                            <div class="idx-name-cell">
+                                <div class="idx-avatar">@initials</div>
+                                @Html.DisplayFor(_ => item.CustomerName)
+                            </div>
+                        </td>
+                        <td>@Html.DisplayFor(_ => item.Phone)</td>
+                        <td>@Html.DisplayFor(_ => item.Service)</td>
+                        <td>
+                            <span class="idx-date-chip">
+                                <svg width="10" height="10" fill="none" stroke="#0F6E56" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                                    <path d="M16 2v4M8 2v4M3 10h18" />
+                                </svg>
+                                @item.AppointmentDate.ToString("MMM dd, yyyy")
+                            </span>
+                        </td>
+                        <td>
+                            <div class="idx-actions">
+                                @Html.ActionLink("", "Edit", new { id = item.BookingId }, new {
+                                @class = "idx-act-btn",
+                                                        title = "Edit",
+                                                        @Html_raw_content = ""
+                                                        })
+                            <a asp-action="Edit" asp-route-id="@item.BookingId" class="idx-act-btn" title="Edit">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.BookingId" class="idx-act-btn" title="Details">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.BookingId" class="idx-act-btn del" title="Delete">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></svg>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                                }
+            </tbody>
+        </table>
+
+        <div id="emptyMsg" class="idx-empty">No bookings match your search.</div>
+
+        <div class="idx-footer">
+            <span class="idx-footer-text" id="rowCount">Showing @count of @count booking@(count == 1 ? "" : "s")</span>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function filterRows(q) {
+            const rows = document.querySelectorAll('#bookingTable tr');
+            let visible = 0;
+            rows.forEach(r => {
+                const match = r.textContent.toLowerCase().includes(q.toLowerCase());
+                r.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            document.getElementById('emptyMsg').style.display = visible === 0 ? 'block' : 'none';
+            document.getElementById('rowCount').textContent =
+                'Showing ' + visible + ' of ' + rows.length + ' booking' + (rows.length === 1 ? '' : 's');
+        }
+    </script>
+}

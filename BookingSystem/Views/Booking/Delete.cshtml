@@ -1,0 +1,230 @@
+﻿@model BookingSystem.Models.Booking
+@{
+    ViewData["Title"] = "Confirm Delete";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<style>
+    :root {
+        --danger-grad: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        --glass-bg: rgba(255, 255, 255, 0.9);
+    }
+
+    .del-wrap {
+        padding: 4rem 1.5rem;
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg-gradient);
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .del-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        max-width: 480px;
+        width: 100%;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        animation: scaleIn 0.4s ease-out;
+    }
+
+    @@keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .del-header {
+        background: var(--danger-grad);
+        padding: 3rem 2rem;
+        text-align: center;
+        color: white;
+        position: relative;
+    }
+
+    .del-icon-box {
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        border: 2px solid rgba(255,255,255,0.3);
+        animation: ring-pulse 2s infinite;
+    }
+
+    @@keyframes ring-pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+        }
+
+        70% {
+            box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+
+    .del-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    .del-subtitle {
+        font-size: 13px;
+        opacity: 0.85;
+        font-weight: 400;
+        margin-top: 5px;
+    }
+
+    .del-info-list {
+        padding: 2.5rem 2rem;
+        background: white;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .info-value {
+        color: #1e293b;
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    .tag-highlight {
+        background: #fef2f2;
+        color: #ef4444;
+        padding: 4px 12px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .del-footer {
+        padding: 0 2rem 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-confirm-del {
+        background: var(--danger-grad);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 15px;
+        transition: 0.3s;
+        box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+        .btn-confirm-del:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(220, 38, 38, 0.4);
+            color: white;
+        }
+
+    .btn-go-back {
+        background: #ffffff;
+        color: #64748b;
+        border: 1px solid #e2e8f0;
+        padding: 14px;
+        border-radius: 16px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+        .btn-go-back:hover {
+            background: #f8fafc;
+            color: #1e293b;
+            border-color: #cbd5e1;
+        }
+</style>
+
+<div class="del-wrap">
+    <div class="del-card">
+        <div class="del-header">
+            <div class="del-icon-box">
+                <i class="bi bi-trash3 fs-2"></i>
+            </div>
+            <h2 class="del-title">Are you sure?</h2>
+            <p class="del-subtitle">This action is permanent and cannot be undone.</p>
+        </div>
+
+        <div class="del-info-list">
+            <div class="info-item">
+                <span class="info-label">Customer</span>
+                <span class="info-value">@Model.CustomerName</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Service</span>
+                <span class="info-value tag-highlight">@Model.Service</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Phone</span>
+                <span class="info-value">@Model.Phone</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Schedule</span>
+                <span class="info-value">@Model.AppointmentDate.ToString("MMM dd, yyyy")</span>
+            </div>
+        </div>
+
+        <div class="del-footer">
+            <form asp-action="Delete" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="BookingId" />
+                <button type="submit" class="btn-confirm-del w-100">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Delete Booking Permanently
+                </button>
+            </form>
+            <a asp-action="Index" class="btn-go-back">
+                Cancel and Go Back
+            </a>
+        </div>
+    </div>
+</div>

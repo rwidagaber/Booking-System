@@ -1,0 +1,216 @@
+﻿@{
+    ViewData["Title"] = "Service Unavailable";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+    .sp-wrap {
+        padding: 3rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .sp-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        max-width: 480px;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .sp-top {
+        background: #1a3a5c;
+        padding: 2.5rem 2rem 2rem;
+    }
+
+    .sp-icon-ring {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1.5px solid rgba(255,255,255,0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+    }
+
+    .sp-title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 22px;
+        color: #fff;
+        margin: 0 0 6px;
+        font-weight: 400;
+    }
+
+    .sp-code {
+        font-size: 11px;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0;
+        font-family: monospace;
+    }
+
+    .sp-body {
+        padding: 1.75rem 2rem;
+    }
+
+    .sp-desc {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.7;
+        margin: 0 0 1.5rem;
+    }
+
+    .sp-divider {
+        height: 1px;
+        background: #f3f4f6;
+        margin: 0 0 1.5rem;
+    }
+
+    .sp-steps {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .sp-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    .sp-step-num {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 500;
+        color: #6b7280;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .sp-footer {
+        padding: 1.25rem 2rem;
+        border-top: 1px solid #f3f4f6;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .sp-btn-home {
+        height: 38px;
+        padding: 0 1.5rem;
+        background: #1a3a5c;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: 'DM Sans', sans-serif;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        text-decoration: none;
+        transition: background 0.15s;
+    }
+
+        .sp-btn-home:hover {
+            background: #0C2340;
+            color: #fff;
+        }
+
+    .sp-btn-contact {
+        height: 38px;
+        padding: 0 1.5rem;
+        background: transparent;
+        color: #6b7280;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 13px;
+        font-family: 'DM Sans', sans-serif;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: background 0.15s;
+    }
+
+        .sp-btn-contact:hover {
+            background: #f9fafb;
+        }
+</style>
+
+<div class="sp-wrap">
+    <div class="sp-card">
+
+        <div class="sp-top">
+            <div class="sp-icon-ring">
+                <svg width="28" height="28" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.6" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                </svg>
+            </div>
+            <p class="sp-title">Service Unavailable</p>
+            <p class="sp-code">Error · Service Stopped</p>
+        </div>
+
+        <div class="sp-body">
+            <p class="sp-desc">
+                This booking service has been temporarily stopped. We apologize for any inconvenience caused.
+            </p>
+            <div class="sp-divider"></div>
+            <div class="sp-steps">
+                <div class="sp-step">
+                    <div class="sp-step-num">1</div>
+                    <span>Check back later — the service may be restored soon.</span>
+                </div>
+                <div class="sp-step">
+                    <div class="sp-step-num">2</div>
+                    <span>Contact support if you have an existing booking that needs attention.</span>
+                </div>
+                <div class="sp-step">
+                    <div class="sp-step-num">3</div>
+                    <span>Return to the homepage to explore other available services.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sp-footer">
+            <a asp-action="Index" asp-controller="Home" class="sp-btn-home">
+                <svg width="13" height="13" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Go to Homepage
+            </a>
+            <a asp-action="Contact" asp-controller="Home" class="sp-btn-contact">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                </svg>
+                Contact Support
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@model BookingSystem.Models.Booking
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<style>
+    .ticket-container {
+        padding: 3rem 1rem;
+        background: #f0f2f5;
+        min-height: 80vh;
+    }
+
+    .ticket-card {
+        background: white;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ticket-header {
+        background: #1a3a5c;
+        color: white;
+        padding: 2.5rem;
+        text-align: center;
+    }
+
+    .ticket-body {
+        padding: 2.5rem;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+    }
+
+    .info-icon {
+        width: 45px;
+        height: 45px;
+        background: #f8fafc;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a3a5c;
+        margin-right: 1rem;
+    }
+
+    .info-label {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .info-value {
+        font-size: 1rem;
+        color: #1e293b;
+        font-weight: 500;
+        margin: 0;
+    }
+</style>
+
+<div class="ticket-container">
+    <div class="ticket-card">
+        <div class="ticket-header">
+            <h3 class="fw-bold mb-1">Booking Confirmation</h3>
+            <p class="opacity-50 small mb-0">Order ID: #@Model.BookingId</p>
+        </div>
+        <div class="ticket-body">
+            <div class="info-row">
+                <div class="info-icon"><i class="bi bi-person"></i></div>
+                <div><p class="info-label">Customer Name</p><p class="info-value">@Model.CustomerName</p></div>
+            </div>
+            <div class="info-row">
+                <div class="info-icon"><i class="bi bi-phone"></i></div>
+                <div><p class="info-label">Contact Number</p><p class="info-value">@Model.Phone</p></div>
+            </div>
+            <div class="info-row">
+                <div class="info-icon"><i class="bi bi-stars"></i></div>
+                <div><p class="info-label">Service Selected</p><p class="info-value text-primary">@Model.Service</p></div>
+            </div>
+            <div class="info-row">
+                <div class="info-icon"><i class="bi bi-calendar-check"></i></div>
+                <div><p class="info-label">Appointment Schedule</p><p class="info-value">@Model.AppointmentDate.ToString("f")</p></div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.BookingId" class="btn btn-primary w-75 rounded-pill py-2">Edit Booking</a>
+                <a asp-action="Index" class="btn btn-outline-secondary w-25 rounded-pill py-2">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
